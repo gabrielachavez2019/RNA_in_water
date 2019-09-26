@@ -17,7 +17,7 @@ This tutorial assumes you are using a [GROMACS](http://www.gromacs.org/) version
 - Open a terminal
 - Make a work directory ie `mkdir pknot_MD` 
 - Fisrt time you might need to source gromacs  `source /automnt/gromacs/default/bin/GMXRC`
-- Get the pknot.pdb file (ie using `scp` )
+- Get the [pknot.pdb](pknot.pdb) file (ie using `scp` )
 - Get all the mdp files cloning this directory using [git](https://github.com/joaks1/au-bootcamp-git-intro) or downloading it as a zip file.
 
 ## Create topology
