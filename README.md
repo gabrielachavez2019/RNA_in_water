@@ -1,5 +1,5 @@
 # RNA_in_water
-RNA Molecular Dynamics Simulation in water and how changes on temperature and ions affect structure
+RNA Molecular Dynamics Simulation is a tutorial to simulate an pseudoknot RNA in water and how changes on temperature and ions affect its structure
 
 ![](https://img.shields.io/twitter/url/http/@gabvet.svg?label=%40gabvet&style=social)
 
@@ -15,7 +15,7 @@ This tutorial assumes you are using a [GROMACS](http://www.gromacs.org/) version
 - Connect to earth.auburn.edu
 - Use your ID Auburn credentials
 - Open a terminal
-- Make a work directory ie `mkdir Zika_MD` 
+- Make a work directory ie `mkdir pknot_MD` 
 - Fisrt time you might need to source gromacs  `source /automnt/gromacs/default/bin/GMXRC`
 - Get the pknot.pdb file (ie using `scp` )
 - Get all the mdp files cloning this directory using [git](https://github.com/joaks1/au-bootcamp-git-intro) or downloading it as a zip file.
@@ -37,7 +37,7 @@ The topology (topol.top by default) contains all the information necessary to de
 Execute pdb2gmx by issuing the following command
 
 `
-gmx pdb2gmx -f ZIKA.pdb -o ZIKA_processed.gro -water spce -ignh
+gmx pdb2gmx -f pknot.pdb -o pknot_processed.gro -water spce -ignh
 `
 
 The structure will be processed by pdb2gmx, and you will be prompted to choose a force field:
