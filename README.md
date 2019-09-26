@@ -1,5 +1,5 @@
 # RNA_in_water
-RNA Molecular Dynamics Simulation is a tutorial to simulate an pseudoknot RNA in water and how changes on temperature and ions affect its structure
+RNA Molecular Dynamics Simulation is a tutorial to simulate an RNA pseudoknot in water and how changes on temperature and ions affect its structure
 
 ![](https://img.shields.io/twitter/url/http/@gabvet.svg?label=%40gabvet&style=social)
 
