@@ -46,9 +46,9 @@ The structure will be processed by pdb2gmx, and you will be prompted to choose a
 GROMACS:      gmx pdb2gmx, version 2018.1
 Executable:   /usr/bin/gmx
 Data prefix:  /usr
-Working dir:  /home/chris/Zika/Zika_MD
+Working dir:  /home/chris/pknot_MD
 Command line:
-  gmx pdb2gmx -f ZIKA.pdb -o ZIKA_processed.gro -water spce -ignh
+  gmx pdb2gmx -f pknot.pdb -o pknot_processed.gro -water spce -ignh
 Select the Force Field:
 From '/usr/share/gromacs/top':
  1: AMBER03 protein, nucleic AMBER94 (Duan et al., J. Comp. Chem. 24, 1999-2012, 2003)
@@ -73,7 +73,7 @@ Please note that we are using the option:
 
 -ignh: Ignore H atoms in the PDB file; especially useful for NMR structures. Otherwise, if H atoms are present, they must be in the named exactly how the force fields in GROMACS expect them to be. Different conventions exist, so dealing with H atoms can occasionally be a headache! If you need to preserve the initial H coordinates, but renaming is required, then the Linux sed command is your friend.
 
-You have now generated three new files: ZIKA_processed.gro, topol.top, and posre.itp. ZIKA_processed.gro is a GROMACS-formatted structure file that contains all the atoms defined within the force field. The topol.top file is the system topology (more on this in a minute). The posre.itp file contains information used to restrain the positions of heavy atoms (more on this later).
+You have now generated three new files: pknot_processed.gro, topol.top, and posre.itp. pknot_processed.gro is a GROMACS-formatted structure file that contains all the atoms defined within the force field. The topol.top file is the system topology (more on this in a minute). The posre.itp file contains information used to restrain the positions of heavy atoms (more on this later).
 
 Let's look at what is in the output topology (topol.top). Inspect its contents using vi or nano, don't change anythig!. After several comment lines (preceded by ;), you will find the following:
 
@@ -139,7 +139,7 @@ The remainder of the file involves defining a few other useful/necessary topolog
 
 [ system ]
 ; Name
-Zika_RNA
+pknot_RNA
 
 [ molecules ]
 ; Compound        #mols
@@ -170,7 +170,7 @@ You are now presented with a choice as to how to treat the unit cell. For the pu
 Let's define the box using editconf:
 
 ```
-gmx editconf -f ZIKA_processed.gro -o ZIKA_newbox.gro -c -d 2.5 -bt triclinic
+gmx editconf -f pknot_processed.gro -o pknot_newbox.gro -c -d 2.5 -bt triclinic
 ```
 
 The above command centers the RNA fragment in the box (-c), and places it at least 2.5 nm from the box edge (-d 2.5). The box type is defined as a cube (-bt triclinic). The distance to the edge of the box is an important parameter. Since we will be using periodic boundary conditions, we must satisfy the minimum image convention. That is, an RNA molecule should never see its periodic image, otherwise the forces calculated will be spurious. Specifying a solute-box distance of 2.5 nm will mean that there are at least 2.0 nm between any two periodic images of the molecule. This distance will be sufficient for just about any cutoff scheme commonly used in simulations.
@@ -180,10 +180,10 @@ The above command centers the RNA fragment in the box (-c), and places it at lea
 Now that we have defined a box, we can fill it with solvent (water). Solvation is accomplished using solvate:
 
 ```
-gmx solvate -cp ZIKA_newbox.gro -cs spc216.gro -o ZIKA_solv.gro -p topol.top
+gmx solvate -cp pknot_newbox.gro -cs spc216.gro -o pknot_solv.gro -p topol.top
 ```
 
-The configuration of the RNA molecule (-cp) is contained in the output of the previous editconf step, and the configuration of the solvent (-cs) is part of the standard GROMACS installation. We are using spc216.gro, which is a generic equilibrated 3-point solvent model. You can use spc216.gro as the solvent configuration for SPC, SPC/E, or TIP3P water, since they are all three-point water models. The output is called ZIKA_solv.gro, and we tell solvate the name of the topology file (topol.top) so it can be modified. Note the changes to the [ molecules ] directive of topol.top:
+The configuration of the RNA molecule (-cp) is contained in the output of the previous editconf step, and the configuration of the solvent (-cs) is part of the standard GROMACS installation. We are using spc216.gro, which is a generic equilibrated 3-point solvent model. You can use spc216.gro as the solvent configuration for SPC, SPC/E, or TIP3P water, since they are all three-point water models. The output is called pknot_solv.gro, and we tell solvate the name of the topology file (topol.top) so it can be modified. Note the changes to the [ molecules ] directive of topol.top:
 
 ```
 [ molecules ]
@@ -209,12 +209,12 @@ In reality, the .mdp file used at this step can contain any legitimate combinati
 
 Assemble your .tpr file with the following:
 
-`gmx grompp -f ions.mdp -c ZIKA_solv.gro -p topol.top -o ions.tpr`
+`gmx grompp -f ions.mdp -c pknot_solv.gro -p topol.top -o ions.tpr`
 
 
 Now we have an atomic-level description of our system in the binary file ions.tpr. We will pass this file to genion:
 
-`gmx genion -s ions.tpr -o ZIKA_solv_ions.gro -p topol.top -pname NA -nname CL -neutral`
+`gmx genion -s ions.tpr -o pknot_solv_ions.gro -p topol.top -pname NA -nname CL -neutral`
 
 Choose group 3 "SOL" for embedding ions. You do not want to replace parts of your RNA with ions.
 
@@ -234,7 +234,7 @@ The process for EM is much like the addition of ions. We are once again going to
 
 Assemble the binary input using grompp using **em.tpr** input parameter file with nsteps = 5000:
 
-`gmx grompp -f minim.mdp -c ZIKA_solv_ions.gro -p topol.top -o em.tpr`
+`gmx grompp -f minim.mdp -c pknot_solv_ions.gro -p topol.top -o em.tpr`
 
 Make sure you have been updating your topol.top file when running genbox and genion, or else you will get lots of nasty error messages ("number of coordinates in coordinate file does not match topology," etc).
 
