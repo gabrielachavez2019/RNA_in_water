@@ -371,7 +371,7 @@ Results look something like:
 
 ![](RMDS_100ns.png)
 
-### Try different conditions and see how the structure changes
+# Try different conditions and see how the structure changes
 - Ions: Na, Li 
 - Temperature: ~RT 300 K (26.8 °C) or lower 200 K (-73.15 °C) or higer 350 K (76.85 °C)
 - Both...
@@ -379,9 +379,9 @@ Results look something like:
 *What happend to the structure of the molecule under different conditons?*
 *Why?*
 
-Happy simulating!
 
-![](Zika_Toomer.png)
+
+Happy simulating!
 
 # Acknowledgments
 
