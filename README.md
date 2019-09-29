@@ -367,21 +367,19 @@ If we wish to calculate RMSD relative to the crystal structure, we could issue t
 
 `gmx rms -s em.tpr -f md_0_1_noPBC.xtc -o rmsd_xtal.xvg -tu ns`
 
-Results look something like:
+Happy simulating!
 
-![](RMDS_100ns.png)
 
 # Try different conditions and see how the structure changes
 - Ions: Na, Li 
 - Temperature: ~RT 300 K (26.8 °C) or lower 200 K (-73.15 °C) or higer 350 K (76.85 °C)
 - Both...
 
-*What happend to the structure of the molecule under different conditons?*
-*Why?*
+**What happend to the structure of the molecule under different conditons?**
+**Why?**
 
 
 
-Happy simulating!
 
 # Acknowledgments
 
