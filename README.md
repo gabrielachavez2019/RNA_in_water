@@ -371,15 +371,13 @@ Results look something like:
 
 ![](RMDS_100ns.png)
 
-### Radius of gyration
-The radius of gyration of an RNA molecule is a measure of its compactness. If the RNA is stably folded, it will likely maintain a relatively steady value of Rg. If the RNA unfolds, its Rg will change over time. Let's analyze the radius of gyration for Zika in our simulation:
+### Try different conditions and see how the structure changes
+- Ions: Na, Li 
+- Temperature: ~RT 300 K (26.8 °C) or lower 200 K (-73.15 °C) or higer 350 K (76.85 °C)
+- Both...
 
-`gmx gyrate -s md_0_1.tpr -f md_0_1_noPBC.xtc -o gyrate.xvg`
-
-Choose group 1 (RNA) for analysis.
-![](Gyration.png)
-
-We can see from the reasonably invariant Rg values that the RNA remains very unestable, does not remain folded in the same way ovet the time form over the course of 1 ns at 300 K. This result is not unexpected, but illustrates an advanced capacity of GROMACS analysis that comes built-in.
+*What happend to the structure of the molecule under different conditons?*
+*Why?*
 
 Happy simulating!
 
