@@ -15,7 +15,7 @@ This tutorial assumes you are using a [GROMACS](http://www.gromacs.org/) version
 - Connect to earth.auburn.edu
 - Use your ID Auburn credentials
 - Open a terminal
-- If you are in mars change to venus (ie `scp user@venus.auburn.edu`)
+- If you are in mars change to venus (ie `ssh user@venus.auburn.edu`)
 - Make a work directory ie `mkdir pknot_MD` 
 - Fisrt time you might need to source gromacs  `source /automnt/gromacs/default/bin/GMXRC`
 - Get the [pknot.pdb](pknot.pdb) file (ie using `scp` )
