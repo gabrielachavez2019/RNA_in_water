@@ -20,6 +20,13 @@ This tutorial assumes you are using a [GROMACS](http://www.gromacs.org/) version
 - Get the [pknot.pdb](pknot.pdb) file (ie using `scp` )
 - Get all the mdp files cloning this directory using [git](https://github.com/joaks1/au-bootcamp-git-intro) or downloading it as a zip file.
 
+## Visualize your pbd in vmd
+
+```
+vmd pknot.pdb
+```
+![](pknot.png)
+
 ## Create topology
 
 Verified that all the necessary atoms are present. Always check your pdb file for MISSING entries, as these entries indicate either atoms or whole residues that are not present in the crystal structure. Terminal regions may be absent, and may not present a problem for dynamics. Incomplete internal sequences or nucleic residues that have missing atoms will cause pdb2gmx to fail. These missing atoms/residues must be modeled in using other software packages: rosetta, robetta or molprobity. 
@@ -175,7 +182,17 @@ gmx editconf -f pknot_processed.gro -o pknot_newbox.gro -c -d 2.5 -bt triclinic
 
 The above command centers the RNA fragment in the box (-c), and places it at least 2.5 nm from the box edge (-d 2.5). The box type is defined as a cube (-bt triclinic). The distance to the edge of the box is an important parameter. Since we will be using periodic boundary conditions, we must satisfy the minimum image convention. That is, an RNA molecule should never see its periodic image, otherwise the forces calculated will be spurious. Specifying a solute-box distance of 2.5 nm will mean that there are at least 2.0 nm between any two periodic images of the molecule. This distance will be sufficient for just about any cutoff scheme commonly used in simulations.
 
-![](Zika_box02.png)
+## Visualize your box in vmd
+
+```
+vmd pknot_newbox.gro
+```
+
+Visualize the box
+
+```
+pbc box
+```
 
 Now that we have defined a box, we can fill it with solvent (water). Solvation is accomplished using solvate:
 
