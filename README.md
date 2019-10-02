@@ -25,7 +25,7 @@ This tutorial assumes you are using a [GROMACS](http://www.gromacs.org/) version
 ```
 vmd pknot.pdb
 ```
-![](pknot.png)
+![](basic_0002.png)
 
 ## Create topology
 
@@ -193,6 +193,7 @@ Visualize the box
 ```
 pbc box
 ```
+![](basic_box.png)
 
 Now that we have defined a box, we can fill it with solvent (water). Solvation is accomplished using solvate:
 
@@ -210,6 +211,8 @@ SOL             127719
 ```
 
 What solvate has done is keep track of how many water molecules it has added, which it then writes to your topology to reflect the changes that have been made. Note that if you use any other (non-water) solvent, solvate will not make these changes to your topology! Its compatibility with updating water molecules is hard-coded.
+
+![](basic_box_water.png)
 
 ## Add ions
 
@@ -241,7 +244,7 @@ The names of the ions specified with -pname and -nname are always the elemental 
 
 Visualize your molecule, water and ions with VMD and you should be able to see this:
 
-![](Zika_water_ions.png)
+![](basic_box_water_ions.png)
 
 ## Energy Minimization
 
